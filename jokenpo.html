@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+//Determina valores das opções
+var pedra = 1
+var papel = 2
+var tesoura = 3
+
+//Define as opções do jogo: 1 = pedra, 2 = papel, 3 = tesoura
+jogadaUsuario = prompt("O que você deseja jogar? \n Digite: 1 = pedra, 2 = papel, 3 = tesoura")
+var jogadaUsuarioConvertida = Number(jogadaUsuario)
+//Seleciona uma opção aleatória para o computador
+var jogadaScript = function jogadaComputador() {
+  return Math.floor(Math.random() * 3) + 1
+}
+
+//Compara as jogadas e determina o vencedor
+function determinarVencedor(jogadaUsuarioConvertida, jogadaScript) {
+  if (jogadaUsuarioConvertida === jogadaScript) {
+    return "Empate"
+  } else if (
+    (jogadaUsuarioConvertida === 1 && jogadaScript === 3) ||
+    (jogadaUsuarioConvertida === 2 && jogadaScript === 1) ||
+    (jogadaUsuarioConvertida === 3 && jogadaScript === 2)
+  ) {
+    return jogadaUsuarioConvertida
+  } else {
+    return jogadaScript
+  }
+}
+
+//Controla o número de rodadas e o número de vitórias de cada jogador
+let numRodadas = 0
+let numVitoriasUsuario = null
+let numVitoriasScript = null
+let vencedorAnterior = null
+
+//Cria um loop principal do jogo
+while (true) {
+  //Obtém a jogada do Usuário
+  jogadaUsuarioConvertida = Number(
+    prompt("Escolha: 1 - pedra, 2 - papel ou 3 - tesoura")
+  )
+
+  //Verifica se a jogada do Usuário é válida
+  if (isNaN(jogadaUsuarioConvertida) || jogadaUsuarioConvertida < 1 || jogadaUsuarioConvertida > 3) {
+    alert("Jogada inválida. Escolha um número: 1 - pedra, 2 - papel, 3 - tesoura")
+    continue
+  }
+
+  //Escolhe a jogada do Computador
+  var jogadaScriptSelecionada = jogadaScript
+  
+  //Exibe as jogadas escolhidas
+  alert(`Usuário: ${jogadaUsuarioConvertida} \nComputador: ${jogadaScriptSelecionada}`)
+
+  //Determina o vencedor e exibe o resultado
+  var vencedor = determinarVencedor(jogadaUsuarioConvertida, jogadaScriptSelecionada)
+
+  if (vencedor === "Empate") {
+    alert("Empatou!")
+  } else if (vencedor === jogadaUsuarioConvertida) {
+    alert("Você venceu!!")
+    numVitoriasUsuario++
+    numVitoriasScript = 0
+  } else {alert("Você perdeu...")
+  numVitoriasScript++
+  numVitoriasUsuario = 0
+}
+
+//Incrementa o número de rodadas
+//numRodadas++
+
+//Verifica se algum jogador venceu duas rodadas consecutivas
+if (numVitoriasUsuario >= 2) {
+  alert("Jogador venceu duas rodadas consecutivas! \nFim de jogo")
+  break
+  } else if (numVitoriasScript >= 2) {
+  alert("Computador venceu duas rodadas consecutivas! \nFim de jogo.")
+  break
+  }
+}
+
+   </script>
+  
+</body>
+</html>
+
+
